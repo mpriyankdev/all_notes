@@ -1,0 +1,127 @@
+ Elasticsearch on Docker:
+ docker pull docker.elastic.co/elasticsearch/elasticsearch:6.6.0
+ docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.6.0
+
+
+Elasticsearch : localhost:9200
+Kibana : localhost:5601
+
+Inorder to run Kibana , elasticsearch needs to be UP and running.
+
+Elasticsearch is Document oriented:
+-Insert , Delete , Retrieve , Analyze and Search Documents.
+
+Based on Apache Lucene which uses Inverted index[maps words to the actual document locations of where they occur]
+
+ Relational-DB vs Elasticsearch
+ Table = index
+ Row = Document
+ Column = Field
+
+ Inserting a Document == Indexing a document
+
+ Syntax : 
+
+ PUT /{index}/{type}/{id}
+ {
+     "field1":"value1",
+     "field2":"value2"
+
+ }
+
+ type : subdivision of index . Support for type will be eliminated from the older versions.
+
+Examples:
+
+Input : 
+
+PUT /vehicle/car/2
+{
+  "name":"sx4",
+  "company":"maruti",
+  "type":"petrol"
+}
+
+*****************************************
+
+{
+  "_index" : "vehicle",
+  "_type" : "car",
+  "_id" : "2",
+  "_version" : 2,
+  "result" : "updated",
+  "_shards" : {
+    "total" : 2,
+    "successful" : 1,
+    "failed" : 0
+  },
+  "_seq_no" : 1,
+  "_primary_term" : 1
+}
+
+----------------------------------------------------
+
+to fetch all with id:2 : 
+GET /vehicle/car/2
+
+to fetch based on field:
+GET /vehicle/car/2/_source
+
+to check if a document exist with a particular id or not : 
+HEAD /vehicle/car/2
+
+Documents are immutable.
+Whole document is updated , particular field is not updated.
+
+In order to update a particular field use the POST method with _update endpoint.
+
+POST /vehicle/car/2/_update
+{
+  "doc":{
+    "name":"hexa"
+  }
+}
+this will basically read the whole document , do the necessary changes and then again re-indexes.
+
+DELETE /vehicle/car/2
+
+marks the document as deleted and time to time elasticsearch will wipe off the document in the background.
+
+Various Queries :  
+term
+match_all
+
+---------------------
+Internal structure : 
+-Indexes 
+-Documents
+- Indexes are splitted in the shards.
+- Shards can be on different nodes.
+- There are Primary Shards and Replica-Shards.
+- Shard has segments
+- Each segment is an inverted index.
+- Documents is converted to inverted index then only it is ready to be searched i.e becomes searchable.
+
+ES -> Analysis -> Convert document to inverted index and store it into shard segment.
+
+Steps involved in the Analysis Process : 
+Below are the filter conditions
+-Remove Stop words.
+-Lowercasing
+-Stemming : go to the root of the word.
+-Synonyms : words with same meaning.
+
+Analyzer : Tokenizer[breking the sentence into words] , Filter
+
+We specify the fields which needs to be analyzed in the index.
+While storing the document , the field for which we have applied the analyzer will be analyzed at the time of indexing.
+
+-----------------------------------------------
+
+
+
+
+
+
+
+
