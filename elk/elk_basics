@@ -120,6 +120,106 @@ While storing the document , the field for which we have applied the analyzer wi
 
 *Creating custom index : 
 
+*Relevancy Score : while searching each document returned has the relevancy score.we can select the document based on the higher score.
+
+Search DSL Components : 
+1. Query Context 
+2. Filter Context
+Both can be combined to form more complex queries.
+
+Examples : 
+----------------------------
+
+GET /courses/_search
+{
+	"query":{
+		"match_all" : {}
+		}
+}
+---------------------------
+
+GET /courses/_search
+{
+	"query":{
+		"match" : {"name":"text to be searched"}
+		}
+}
+--------------------------
+To check if the field exists in the document or not.
+GET /courses/_search
+{
+	"query":{
+		"exists" : {"field":"professor.email"}
+		}
+}
+------------------------
+Achieving and clause in ES:
+
+GET /courses/_search
+{
+	"query":{
+		"bool":{
+		must:[
+		{"match":{"name":"computer"}},
+		{"match":{"room":"c8"}}
+		]
+				}
+			}
+}
+
+--------------------------
+GET /courses/_search
+{
+	"query":{
+		"bool":{
+		must_not:[
+		{"match":{"name":"computer"}},
+		{"match":{"room":"c8"}}
+		]
+			   }
+			}
+}
+
+------------------------------------
+should : 'LIKE' operator.
+minimum_should_match : minm. one condition to be met.inside the 'should' clause.
+
+-------------------
+multi_match clause : 
+GET /courses/_search
+{
+	"query":{
+		"multi_match" : {
+			"fields":["name":"professor.department"],
+			"query":"accounting"
+		}
+		}
+}
+---------------------------
+match_phrase : 
+match_phrase_prefix : 
+range : gte,lte,gt,lt
+
+GET /courses/_search
+{
+	"query":{
+		"range":{
+			"students_enrolled":{
+				"gte":10,
+				"lte":20
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
 
 
 
