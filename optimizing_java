@@ -1,0 +1,6 @@
+Keywords : 
+- JIT Compiler
+- AOT Compiler
+
+Architecture of JVM : 
+.java --> javac --> .class --> classloader --> method cache --> interpreter --> profiler --> emitter --> code cache
