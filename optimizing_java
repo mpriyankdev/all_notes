@@ -1,6 +1,21 @@
-Keywords : 
+Keywords :
+- Moores Law
 - JIT Compiler
 - AOT Compiler
 
 Architecture of JVM : 
-.java --> javac --> .class --> classloader --> method cache --> interpreter --> profiler --> emitter --> code cache
+.java --> javac --> .class --> classloader[single entry point] --> method cache --> interpreter --> profiler --> emitter --> code cache --> interpreter
+
+Read article : The free lunch is over.
+Processor memory performance gap.
+
+Modern processor architecture:
+
+CPU Cores
+L1 cache
+L2 cache [may or may not be shared , depends on the architecture]
+L3 cache [shared between cores]
+Northbridge [data flows through them from cache to main memory]
+Main memory
+
+1byte : 48 transistors
