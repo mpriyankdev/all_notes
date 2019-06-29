@@ -19,3 +19,18 @@ Northbridge [data flows through them from cache to main memory]
 Main memory
 
 1byte : 48 transistors
+
+Unix Memory Model:[Unix process]
+Text --> Data --> Heap --> Stack
+
+Each thread in Unix will have its own stack frame and it will share access to the heap.
+
+application thread and os thread are the same in java.
+
+Unix process memory model : 
+MMU : converts virtual addresses to the underlying physical address.
+TLAP : Translation look ahead buffer.
+
+Context switch : 
+-Heavy weight context switch : a thread from once process needs to access some other thread from other process.Full reload needs to happen in the MMU.
+
