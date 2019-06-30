@@ -57,6 +57,22 @@ Helps in saving the memory and address more objects in the heap.
 
 
 
+Mark word is used : 
+-for locking and handling the object state.
+  unlocked
+  biased
+  lightweight locked
+  heavyweight locked
+-during Garbage collection.
+
+
+Klass word : Points at the metadata for the class.
+-especially bytecode for the methods.
+-ponts to metaspace[for java8]
+-points to permgen[java7 and earlier]
+
+hotspot/src/share/vm/oops in OpenJDK source.
+
 
 
 
