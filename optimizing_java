@@ -74,6 +74,20 @@ Klass word : Points at the metadata for the class.
 hotspot/src/share/vm/oops in OpenJDK source.
 
 
+--------------------------------
+Bytecode basics:
+-each operation code represented by 1byte.
+-about 200opcodes in use.
+
+javap : peeking inside classpiles.
+-shows disassembeled bytecode and constant pool information.
+
+javap : shows public , protected and default methods.
+javap -p : also shows private methods.
+
+
+
+
 
 
 
