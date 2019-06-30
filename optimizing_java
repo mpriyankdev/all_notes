@@ -34,3 +34,38 @@ TLAP : Translation look ahead buffer.
 Context switch : 
 -Heavy weight context switch : a thread from once process needs to access some other thread from other process.Full reload needs to happen in the MMU.
 
+------------------
+JVM Memory and pointers:
+-All JVM references are typed.
+-Bytecode cannot call an arbitrary memory location.
+
+Ordinary object pointer : lives inside the JVM.
+-Every java reference[if it is not pointing to null] points to an oop location.
+
+-Mark and Klass word.
+-Every object in java has Object header and it is in the heap [every object in heap has to have the object header]
+-Object pointer points from 1. Stack to heap 2. Heap to Heap.
+
+Compresses OOPS : space saving mechanism.
+32-bit JVM : 8bytes object header.
+64-bit JVM : 16bytes object header.
+
+To reduce this overhead per object , we have compressed oops.
+Represesnt 64 bit address in 32bits.
+Helps in saving the memory and address more objects in the heap.
+-XX:+UseCompressedOops
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
